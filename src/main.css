@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* hey */
+
+@font-face {
+  font-family: 'NRT-Reg';
+  src: url('/font/NRT-Reg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --color-dark-grey: #2e384d;
+  --color-light-grey: #a4aab8;
+  --color-sky-blue: #f4f6fc;
+  --color-white: #ffffff;
+  --color-main: #2e5bff;
+  --color-main-dark: #1f3da8;
+  --color-main-transparent: #0072cf1a;
+  --color-red: #ff6666;
+  --color-red-dark: #ee5c5c;
+  --color-blure: #ebebeb80;
+
+  --border-radius-sm: 0.4rem;
+  --border-radius-md: 1.2rem;
+
+  --transition-base: 0.3s ease-in-out;
+
+  --shadow-sm: rgba(46, 91, 255, 0.1) 0px 0px 6px 2px;
+  --shadow-md: rgba(46, 91, 255, 0.15) 0px 0px 8px 2px;
+  --shadow-lg: rgba(46, 91, 255, 0.2) 0px 0px 10px 2px;
+
+  --image-grayscale: 0;
+  --image-opacity: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'NRT-Reg', sans-serif;
+
+  background: var(--color-sky-blue);
+  color: var(--color-dark-grey);
+
+  transition:
+    color 0.3s,
+    background-color 0.3s;
+  min-height: 100dvh;
+  line-height: 1.5;
+  font-size: 1.6rem;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+*:disabled {
+  cursor: not-allowed;
+}
+
+select:disabled,
+input:disabled {
+  background-color: var(--color-grey-200);
+  color: var(--color-grey-500);
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: -1px;
+}
+
+/* Parent selector, finally 😃 */
+button:has(svg) {
+  line-height: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+  direction: rtl;
+}
+
+img {
+  max-width: 100%;
+
+  /* For dark mode */
+  filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+}
+
+/* ////////////////////////// */
+/* Custom radio input */
+
+.radio {
+  position: relative;
+
+  display: inline-block;
+
+  margin: 0;
+
+  width: 12px;
+  height: 12px;
+
+  cursor: pointer;
+
+  border: none;
+  outline: none;
+}
+
+.radio:before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border: 2px solid var(--color-grey);
+  border-radius: 50%;
+
+  background-color: var(--color-darkest-grey);
+
+  transform: scale(1.1);
+}
+
+.radio:after {
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background-color: var(--color-darkest-grey);
+}
+
+.radio:checked:after {
+  background-color: var(--color-main);
+}
+
+/* ////////////////////////// */
+/* Custom date input icon */
+input[type='date']::-webkit-calendar-picker-indicator {
+  margin-left: 10px;
+}
+
+/* ////////////////////////// */
+/* Custom scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-sky-blue);
+  border-radius: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-light-grey);
+  border-radius: 50rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8f94a0;
+}
+
+/* ////////////////////////// */
+/* Custom classes */
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-sky-blue);
+  @apply rounded-xl;
+  box-shadow: var(--shadow-lg);
+  padding: 32px 40px;
+  transition: all 0.5s ease-in-out;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-blure);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  transition: all 0.5s ease-in-out;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.inventoryTable {
+  grid-template-columns: 4rem 1fr 1fr 1fr 1fr 2fr;
+}
+.transactionTable {
+  grid-template-columns: 4rem 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+/* ////////////////////////// */
+/* Custom classes for tailwind */
+
+.input {
+  box-shadow: var(--shadow-sm);
+  @apply rounded-md border bg-white p-4  text-xl transition-all duration-300 focus:border-main;
+}
+
+.smallInput {
+  @apply p-2 text-base;
+}
+
+textarea{
+  font-size: 16px;
+  line-height: 24px;
+}
