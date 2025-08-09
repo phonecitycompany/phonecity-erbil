@@ -10,6 +10,7 @@ import { formatCurrency } from '../utils/helpers';
 import writtenNumber from 'written-number';
 import { PAGE_SIZE } from '../utils/constants';
 import moment from 'moment';
+
 export default function SingleInvoice({
   type,
   lang,
@@ -293,12 +294,13 @@ function EnglishCompany({ data, moneyType, USDTOAED, personsBalance }) {
         <div className="mt-3 flex flex-row justify-between px-40">
           <div className="flex flex-col items-start gap-3">
             <h1 className="text-5xl font-bold">Madinat AL-Hawtf Company</h1>
+
             <div className=" w-fit text-left">
               <p>
-                Sirwan Nwe mall, second Floor, 14-15
-                <br /> Mawlawi St
+                VIP Mobile, First floor, Shop No 7
+                <br /> Salam District
               </p>
-              <p>Sulaymaniyah</p>
+              <p>Erbil</p>
               <p>Kurdistan-Iraq</p>
             </div>
           </div>
@@ -485,10 +487,10 @@ function KurdishCompany({ data, moneyType, USDTOAED, personsBalance }) {
             <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
             <div className=" w-fit text-right">
               <p>
-                سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                <br /> شەقامی مەولەوی
+                مۆبایل VIP ، نهۆمی یەکەم ،دووکانی ژمارە ٧
+                <br /> كۆتەرێ سه‌لام
               </p>
-              <p>سلێمانی</p>
+              <p>هەولێر</p>
               <p>كوردستان العراق</p>
             </div>
           </div>
@@ -664,10 +666,10 @@ function ArabicCompany({ data, moneyType, USDTOAED, personsBalance }) {
             <h1 className="text-5xl font-bold">شرکة مدينة الهواتف</h1>
             <div className=" w-fit text-right">
               <p>
-                سيروان نوي مول، الطابق الثاني، 14-15
-                <br /> شارع المولوي
+                موبايل VIP، الطابق الأول، محل رقم ٧
+                <br /> حي السلام
               </p>
-              <p>السليمانية</p>
+              <p>أربيل</p>
               <p>كردستان العراق</p>
             </div>
           </div>
@@ -880,10 +882,10 @@ function EnglishSell({ data, moneyType, USDTOAED, personsBalance }) {
                 <h1 className="text-5xl font-bold">Madinat AL-Hawtf Company</h1>
                 <div className="w-fit text-left text-3xl">
                   <p>
-                    Sirwan Nwe mall, second Floor, 14-15
-                    <br /> Mawlawi St
+                    VIP Mobile, First floor, Shop No 7
+                    <br /> Salam District
                   </p>
-                  <p>Sulaymaniyah</p>
+                  <p>Erbil</p>
                   <p>Kurdistan-Iraq</p>
                 </div>
               </div>
@@ -1127,10 +1129,10 @@ function KurdishSell({ data, moneyType, USDTOAED, personsBalance }) {
                 <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
                 <div className="w-fit text-right text-3xl">
                   <p>
-                    سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                    <br /> شەقامی مەولەوی
+                    مۆبایل VIP ، نهۆمی یەکەم ، دووکانی ژمارە ٧
+                    <br /> كۆتەرێ سه‌لام
                   </p>
-                  <p>سلێمانی</p>
+                  <p>هەولێر</p>
                   <p>كوردستان العراق</p>
                 </div>
               </div>
@@ -1387,10 +1389,11 @@ function ArabicSell({ data, moneyType, USDTOAED, personsBalance }) {
                 <h1 className="text-5xl font-bold">شرکة مدينة الهواتف</h1>
                 <div className="w-fit text-right text-3xl">
                   <p>
-                    سيروان نوي مول، الطابق الثاني، 14-15
-                    <br /> شارع المولوي
+                    موبايل VIP، الطابق الأول، محل رقم ٧
+                    <br /> حي السلام
                   </p>
-                  <p>السليمانية</p>
+
+                  <p>أربيل</p>
                   <p>كردستان العراق</p>
                 </div>
               </div>
@@ -1618,10 +1621,10 @@ function EnglishInvoiceGet({
             <h1 className="text-5xl font-bold">Madinat AL-Hawtf Company</h1>
             <div className="w-fit text-left text-3xl">
               <p>
-                Sirwan Nwe mall, second Floor, 14-15
-                <br /> Mawlawi St
+                VIP Mobile, First floor, Shop No 7
+                <br /> Salam District
               </p>
-              <p>Sulaymaniyah</p>
+              <p>Erbil</p>
               <p>Kurdistan-Iraq</p>
             </div>
           </div>
@@ -1727,10 +1730,10 @@ function KurdishInvoiceGet({
             <h1 className="rtl text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
             <div className="w-fit text-right text-3xl">
               <p>
-                سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                <br /> شەقامی مەولەوی
+                مۆبایل VIP ، نهۆمی یەکەم ،دووکانی ژمارە ٧
+                <br /> كۆتەرێ سه‌لام
               </p>
-              <p>سلێمانی</p>
+              <p>هەولێر</p>
               <p>كوردستان العراق</p>
             </div>
           </div>
@@ -1840,10 +1843,10 @@ function ArabicInvoiceGet({
             <h1 className="text-5xl font-bold">شرکة مدينة الهواتف</h1>
             <div className="w-fit text-right text-3xl">
               <p>
-                سيروان نوي مول، الطابق الثاني، 14-15
-                <br /> شارع المولوي
+                موبايل VIP، الطابق الأول، محل رقم ٧
+                <br /> حي السلام
               </p>
-              <p>السليمانية</p>
+              <p>أربيل</p>
               <p>كردستان العراق</p>
             </div>
           </div>
@@ -2011,10 +2014,10 @@ function EnglishMixed({
                 <h1 className="text-5xl font-bold">Madinat AL-Hawtf Company</h1>
                 <div className=" w-fit text-left">
                   <p>
-                    Sirwan Nwe mall, second Floor, 14-15
-                    <br /> Mawlawi St
+                    VIP Mobile, First floor, Shop No 7
+                    <br /> Salam District
                   </p>
-                  <p>Sulaymaniyah</p>
+                  <p>Erbil</p>
                   <p>Kurdistan-Iraq</p>
                 </div>
               </div>
@@ -2239,10 +2242,10 @@ function ArabicMixed({
                 <h1 className="text-5xl font-bold">شرکة مدينة الهواتف </h1>
                 <div className=" w-fit text-right">
                   <p>
-                    سيروان نوي مول، الطابق الثاني، 14-15
-                    <br /> شارع المولوي
+                    موبايل VIP، الطابق الأول، محل رقم ٧
+                    <br /> حي السلام
                   </p>
-                  <p>السليمانية</p>
+                  <p>أربيل</p>
                   <p>كردستان العراق</p>
                 </div>
               </div>
@@ -2458,10 +2461,10 @@ function KurdishMixed({
                 <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف</h1>
                 <div className=" w-fit text-right">
                   <p>
-                    سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                    <br /> شەقامی مەولەوی
+                    مۆبایل VIP ، نهۆمی یەکەم ، دووکانی ژمارە ٧
+                    <br /> كۆتەرێ سه‌لام
                   </p>
-                  <p>سلێمانی</p>
+                  <p>هەولێر</p>
                   <p>كوردستان العراق</p>
                 </div>
               </div>
@@ -2655,10 +2658,10 @@ function BoxInvo({ data, USDTOAED }) {
                 <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
                 <div className=" w-fit text-right">
                   <p>
-                    سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                    <br /> شەقامی مەولەوی
+                    مۆبایل VIP ، نهۆمی یەکەم ، دووکانی ژمارە ٧
+                    <br /> كۆتەرێ سه‌لام
                   </p>
-                  <p>سلێمانی</p>
+                  <p>هەولێر</p>
                   <p>كوردستان العراق</p>
                 </div>
               </div>
@@ -2804,10 +2807,10 @@ function AllDebtInvo({ data, USDTOAED }) {
                 <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
                 <div className=" w-fit text-right">
                   <p>
-                    سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                    <br /> شەقامی مەولەوی
+                    مۆبایل VIP ، نهۆمی یەکەم ، دووکانی ژمارە ٧
+                    <br /> كۆتەرێ سه‌لام
                   </p>
-                  <p>سلێمانی</p>
+                  <p>هەولێر</p>
                   <p>كوردستان العراق</p>
                 </div>
               </div>
@@ -2866,8 +2869,8 @@ function AllDebtInvo({ data, USDTOAED }) {
                                   item?.total
                                     ? item?.total * USDTOAED
                                     : item?.npurchase
-                                      ? item?.npurchase * USDTOAED
-                                      : 0,
+                                    ? item?.npurchase * USDTOAED
+                                    : 0,
                                 )}
                               </span>
 
@@ -2972,10 +2975,10 @@ function GetDebtInvo({ data, USDTOAED, startAt }) {
                 <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
                 <div className=" w-fit text-right">
                   <p>
-                    سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                    <br /> شەقامی مەولەوی
+                    مۆبایل VIP ، نهۆمی یەکەم ، دووکانی ژمارە ٧
+                    <br /> كۆتەرێ سه‌لام
                   </p>
-                  <p>سلێمانی</p>
+                  <p>هەولێر</p>
                   <p>كوردستان العراق</p>
                 </div>
               </div>
@@ -3145,10 +3148,10 @@ function DashBoard({ data, USDTOAED }) {
             <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
             <div className=" w-fit text-right">
               <p>
-                سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                <br /> شەقامی مەولەوی
+                مۆبایل VIP ، نهۆمی یەکەم ،دووکانی ژمارە ٧
+                <br /> كۆتەرێ سه‌لام
               </p>
-              <p>سلێمانی</p>
+              <p>هەولێر</p>
               <p>كوردستان العراق</p>
             </div>
           </div>
@@ -3311,10 +3314,10 @@ function InventoryInvo({ data, USDTOAED }) {
                 <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
                 <div className=" w-fit text-right">
                   <p>
-                    سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                    <br /> شەقامی مەولەوی
+                    مۆبایل VIP ، نهۆمی یەکەم ، دووکانی ژمارە ٧
+                    <br /> كۆتەرێ سه‌لام
                   </p>
-                  <p>سلێمانی</p>
+                  <p>هەولێر</p>
                   <p>كوردستان العراق</p>
                 </div>
               </div>
@@ -3460,10 +3463,10 @@ function ShareInvoice({
                 <h1 className="text-5xl font-bold">کۆمپانیای مدينة الهواتف </h1>
                 <div className="w-fit text-right text-3xl">
                   <p>
-                    سیروانی نوێ نهۆمی دووەم دوکانی ژمارە ١٤-١٥
-                    <br /> شەقامی مەولەوی
+                    مۆبایل VIP ، نهۆمی یەکەم ، دووکانی ژمارە ٧
+                    <br /> كۆتەرێ سه‌لام
                   </p>
-                  <p>سلێمانی</p>
+                  <p>هەولێر</p>
                   <p>كوردستان العراق</p>
                 </div>
               </div>
