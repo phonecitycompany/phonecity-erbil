@@ -111,7 +111,7 @@ export default function OwnerShip() {
                   key={partner.id}
                 >
                   <div className="absolute left-0 top-0">
-                    %{partner?.share * 100}
+                    %{Math.ceil(Number(partner?.share))}
                   </div>
                   <div className=" mr-2 ">{partner?.Partner_name}</div>
                   <div className="h-5 w-5 rounded-full bg-main"></div>

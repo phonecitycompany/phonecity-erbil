@@ -145,3 +145,21 @@ export async function getValueForCapital() {
   }
   return data;
 }
+
+// CREATE OR REPLACE FUNCTION public.update_capital()
+//  RETURNS trigger
+//  LANGUAGE plpgsql
+// AS $function$
+// BEGIN
+//   INSERT INTO capital (value)
+//   VALUES ((
+//     SELECT
+//     COALESCE((SELECT sum(total) FROM sellers), 0) +
+//     COALESCE((SELECT sum(total) FROM companies), 0) +
+//     COALESCE((SELECT sum(total) FROM debtor), 0) +
+//     COALESCE((SELECT sum(total_price) FROM inventory), 0) +
+//     COALESCE((SELECT sum((SELECT sum(deposit - withdrawal) FROM vault) + (SELECT sum(total) FROM partners))), 0)
+//   ));
+//   RETURN NEW;
+// END;
+// $function$
