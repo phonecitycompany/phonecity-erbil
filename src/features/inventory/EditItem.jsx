@@ -154,7 +154,7 @@ function EditItem({
             <input
               className="w-96 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
               type="number"
-              min={0}
+              min={-10000}
               id="totalSellForEdited"
               autoComplete="totalSellForEdited"
               {...register('totalSellForEdited', {
