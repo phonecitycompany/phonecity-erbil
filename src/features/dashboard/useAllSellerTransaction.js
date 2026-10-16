@@ -1,16 +1,16 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getAllTransactionItems} from '../../services/apiTransaction';
+import { useQuery } from '@tanstack/react-query';
+import { getAllLoans } from '../../services/apiCompanyOrSellerLoans';
+
 export function useAllSellerTransaction() {
- 
+  const filter = { tableName: 'sellers', type: 'Local' };
 
   // QUERY
-  const { isLoading, data: { data: allsellerTransacrtion, count } = {} } = useQuery({
-    queryKey: ['allseller_transaction'],
-    queryFn: () => getAllTransactionItems(),
+  const { isLoading, data: { data: loansItem, count } = {} } = useQuery({
+    queryKey: ['getAllLoans', filter],
+    queryFn: () => getAllLoans({ filter }),
   });
 
- // PRE-FETCHING
-  
+  const totalLocalLoan = loansItem?.[0]?.total_value || 0;
 
-  return { allsellerTransacrtion, isLoading, count };
-}
+  return { totalLocalLoan, allsellerTransacrtion: loansItem, isLoading, count };
+}

@@ -10,6 +10,18 @@ function LoanList({ loansItem, loanId, setLoanId }) {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const sortedLoans = loansItem
+    ? [...loansItem].sort((a, b) =>
+        (a?.debtor_name || '')
+          .trim()
+          .localeCompare(
+            (b?.debtor_name || '').trim(),
+            ['ckb', 'ku', 'ar', 'en'],
+            { sensitivity: 'base', numeric: true },
+          ),
+      )
+    : [];
+
   useEffect(() => {
     // const searchParamsSellerValue = searchParams.get('seller');
     // if (searchParamsSellerValue) {
@@ -30,13 +42,14 @@ function LoanList({ loansItem, loanId, setLoanId }) {
         className=" rtl flex w-full cursor-pointer flex-row items-center justify-between rounded-xl bg-main p-3 hover:bg-main-dark"
       >
         <p className="text-white">
-          {loansItem?.find(seller => seller.id == loanId)?.debtor_name}
+          {sortedLoans?.find(seller => seller.id == loanId)?.debtor_name ||
+            'ناوی وەرگر'}
         </p>
         <IoIosArrowDropdownCircle className="text-5xl text-white" />
       </div>
       {open === true && (
         <div className="absolute top-full z-10 mt-2 max-h-96 w-full overflow-y-scroll rounded-xl border-2 bg-white p-6 shadow-md">
-          {loansItem?.map((item, i) => {
+          {sortedLoans?.map((item, i) => {
             return (
               <div
                 key={i}

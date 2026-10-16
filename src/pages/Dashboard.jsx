@@ -55,7 +55,7 @@ function Dashboard() {
   } = UseGetVaultItems();
 
   const {
-    allsellerTransacrtion,
+    totalLocalLoan,
     isLoading: isLoadingSell,
     count: countSell,
   } = useAllSellerTransaction();
@@ -74,10 +74,7 @@ function Dashboard() {
       (sum, item) => sum + (item.total || 0),
       0,
     ),
-    ourloan: allsellerTransacrtion?.reduce(
-      (sum, item) => sum + (item?.total_purchase || 0),
-      0,
-    ),
+    ourloan: totalLocalLoan,
     customerloan: allCompany?.reduce(
       (sum, item) => sum + (item?.total_purchase || 0),
       0,

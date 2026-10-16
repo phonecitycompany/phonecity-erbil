@@ -12,6 +12,8 @@ function LoanFilter() {
         <DropdownItem className="w-72">
           <SortBy
             options={[
+              { value: 'nameAtoZ', label: 'بەپێی پیت (A - Z)' },
+              { value: 'nameZtoA', label: 'بەپێی پیت (Z - A)' },
               { value: 'totalLowToHigh', label: 'کەمترین پارەی قەرزکراو' },
               { value: 'totalHighToLow', label: 'زۆرترین پارەی قەرز کراو' },
             ]}

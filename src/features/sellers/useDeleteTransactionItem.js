@@ -24,6 +24,12 @@ export function useDeleteTransactionItem() {
       queryClient.invalidateQueries({
         queryKey: ['transactiontotal'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['seller'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['getAllLoans'],
+      });
     },
     onError: err =>
       toast.error(err.message, {

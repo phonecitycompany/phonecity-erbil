@@ -12,6 +12,12 @@ export function useAddSellerTransactionItem() {
       queryClient.invalidateQueries({
         queryKey: ['transactiontotal'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['seller'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['getAllLoans'],
+      });
 
       toast.success('بە سەرکەوتوی زیاد کرا', {
         style: {

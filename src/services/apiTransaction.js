@@ -135,40 +135,32 @@ export async function gettotalforfilter({
   dateBetween,
   bewlowDateValue,
 }) {
-  let query = supabase
-    .from('seller_transaction')
-    .select('* , sellers(*)', { count: 'exact' })
-    .order(sortBy.field, { ascending: sortBy.direction });
-
-  if (filterByDate) {
-    query = query.eq('transaction_date', filterByDate);
-  } else if (
-    dateBetween?.startDate &&
-    dateBetween?.startDate &&
-    dateBetween?.endDate &&
-    dateBetween?.endDate
-  ) {
-    query = query
-      .gte('transaction_date', dateBetween.startDate)
-      .lte('transaction_date', dateBetween.endDate);
-  } else if (bewlowDateValue) {
-    query = query.lte('transaction_date', bewlowDateValue);
-  }
-  if (sellerId !== null && sellerId !== undefined) {
-    query = query.eq('seller_id', sellerId);
-  } else {
-    // If sellerId is null or undefined, return an empty array with count 0
+  if (sellerId === null || sellerId === undefined || sellerId === '') {
     return { data: [], count: 0 };
   }
 
-  // if (filter) query = query[filter.method || 'eq'](filter.field, filter.value);
+  const buildQuery = () => {
+    let query = supabase
+      .from('seller_transaction')
+      .select('* , sellers(*)', { count: 'exact' });
 
-  // if (sortBy)
-  //   query = query.order(sortBy.field, {
-  //     ascending: sortBy.direction === 'asc',
-  //   });
+    if (sortBy?.field) {
+      query = query.order(sortBy.field, { ascending: sortBy.direction });
+    }
+    if (filterByDate) {
+      query = query.eq('transaction_date', filterByDate);
+    } else if (dateBetween?.startDate && dateBetween?.endDate) {
+      query = query
+        .gte('transaction_date', dateBetween.startDate)
+        .lte('transaction_date', dateBetween.endDate);
+    } else if (bewlowDateValue) {
+      query = query.lte('transaction_date', bewlowDateValue);
+    }
+    query = query.eq('seller_id', sellerId);
+    return query;
+  };
 
-  const { error, data, count } = await query;
+  const { error, data, count } = await buildQuery().range(0, 999);
 
   if (error || !data) {
     console.error(error);
@@ -176,5 +168,19 @@ export async function gettotalforfilter({
     throw new Error('کاڵاکان نەدۆزرانەوە');
   }
 
-  return { data, count };
+  let allData = [...data];
+  if (count && count > 1000) {
+    let from = 1000;
+    while (from < count) {
+      const { data: nextBatch, error: nextError } = await buildQuery().range(
+        from,
+        from + 999,
+      );
+      if (nextError || !nextBatch || nextBatch.length === 0) break;
+      allData.push(...nextBatch);
+      from += 1000;
+    }
+  }
+
+  return { data: allData, count };
 }

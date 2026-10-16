@@ -101,7 +101,7 @@ export default function LoansTypeTab() {
             <div className="flex flex-1 items-center justify-between rounded-2xl bg-sky-blue p-3">
               {allLoanItems && USDTOAED && (
                 <div className="">
-                  {newFormatCurrency(allLoanItems[0]?.total_value * USDTOAED)} 
+                  {newFormatCurrency(allLoanItems[0]?.total_value * USDTOAED)}
                 </div>
               )}
               <div className="">کۆی قەرز بە درهەم</div>

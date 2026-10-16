@@ -6,20 +6,7 @@ export async function getLoansItems({ page, loanstab }) {
   let query = supabase
     .from('debtor')
     .select('*', { count: 'exact' })
-    .order('id', { ascending: true });
-
-  // if (filter) query = query[filter.method || 'eq'](filter.field, filter.value);
-
-  // if (sortBy)
-  //   query = query.order(sortBy.field, {
-  //     ascending: sortBy.direction === 'asc',
-  //   });
-
-  if (page && loanstab == 'givingLoans') {
-    const from = (page - 1) * PAGE_SIZE;
-    const to = from + PAGE_SIZE - 1;
-    query.range(from, to);
-  }
+    .order('debtor_name', { ascending: true });
 
   const { error, data, count } = await query;
 
@@ -28,6 +15,15 @@ export async function getLoansItems({ page, loanstab }) {
 
     throw new Error('وەرگرکان نەدۆزرانەوە');
   }
+
+  data.sort((a, b) =>
+    (a?.debtor_name || '')
+      .trim()
+      .localeCompare((b?.debtor_name || '').trim(), ['ckb', 'ku', 'ar', 'en'], {
+        sensitivity: 'base',
+        numeric: true,
+      }),
+  );
 
   return { data, count };
 }

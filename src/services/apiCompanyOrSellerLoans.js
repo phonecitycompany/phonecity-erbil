@@ -32,21 +32,55 @@ export async function getLoans({ page, filter, sortBy, dateBetween }) {
   if (filter?.type && dateBetween.startDate && dateBetween.endDate) {
     query = query.eq('stype', filter?.type);
   }
-  if (sortBy) {
+  if (sortBy && !sortBy.isName) {
     query = query.order(sortBy.field, { ascending: sortBy.direction });
+  } else {
+    const nameCol =
+      filter?.tableName === 'companies'
+        ? 'company_name'
+        : filter?.tableName === 'sellers'
+          ? 'seller_name'
+          : 'debtor_name';
+    if (!dateBetween.startDate || !dateBetween.endDate) {
+      query = query.order(nameCol, {
+        ascending: !(sortBy?.isName && sortBy.direction === false),
+      });
+    }
   }
-
-  // if (page) {
-  //   const from = (page - 1) * PAGE_SIZE;
-  //   const to = from + PAGE_SIZE - 1;
-  //   query.range(from, to);
-  // }
 
   const { error, data, count } = await query;
   if (error || !data) {
     console.error(error);
 
     throw new Error('کاڵاکان نەدۆزرانەوە');
+  }
+
+  const getName = item =>
+    (
+      item?.company_name ||
+      item?.seller_name ||
+      item?.debtor_name ||
+      item?.sname ||
+      item?.cname ||
+      item?.dname ||
+      item?.name ||
+      ''
+    ).trim();
+
+  if (data?.length) {
+    if (sortBy && !sortBy.isName) {
+      // User explicitly sorted by total
+    } else {
+      const isDesc = sortBy?.isName && sortBy.direction === false;
+      data.sort((a, b) => {
+        const comp = getName(a).localeCompare(
+          getName(b),
+          ['ckb', 'ku', 'ar', 'en'],
+          { sensitivity: 'base', numeric: true },
+        );
+        return isDesc ? -comp : comp;
+      });
+    }
   }
 
   if (data.length && page) {

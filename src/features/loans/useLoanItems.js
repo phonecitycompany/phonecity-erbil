@@ -14,24 +14,9 @@ export function useLoanItems() {
 
   // QUERY
   const { isLoading, data: { data: loansItem, count } = {} } = useQuery({
-    queryKey: ['loanItems', page, loanstab],
-    queryFn: () => getLoansItems({ page, loanstab }),
+    queryKey: ['loanItems', loanstab],
+    queryFn: () => getLoansItems({ loanstab }),
   });
-
-  // PRE-FETCHING
-  const pageCount = Math.ceil(count / PAGE_SIZE);
-
-  if (page < pageCount)
-    queryClient.prefetchQuery({
-      queryKey: ['loanItems', page + 1, loanstab],
-      queryFn: () => getLoansItems({ page: page + 1, loanstab }),
-    });
-
-  if (page > 1)
-    queryClient.prefetchQuery({
-      queryKey: ['loanItems', page - 1, loanstab],
-      queryFn: () => getLoansItems({ page: page - 1, loanstab }),
-    });
 
   return { isLoading, count, loansItem };
 }

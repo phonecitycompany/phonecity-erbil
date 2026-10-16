@@ -32,24 +32,9 @@ export function useSellerItem() {
 
   // QUERY
   const { isLoading, data: { data: sellerItem, count } = {} } = useQuery({
-    queryKey: ['seller', page, filter],
-    queryFn: () => getSellerItems({ page, filter }),
+    queryKey: ['seller', filter],
+    queryFn: () => getSellerItems({ filter }),
   });
-
-  // PRE-FETCHING
-  const pageCount = Math.ceil(count / PAGE_SIZE);
-
-  if (page < pageCount)
-    queryClient.prefetchQuery({
-      queryKey: ['seller', page + 1, filter],
-      queryFn: () => getSellerItems({ page: page + 1, filter }),
-    });
-
-  if (page > 1)
-    queryClient.prefetchQuery({
-      queryKey: ['seller', page - 1, filter],
-      queryFn: () => getSellerItems({ page: page - 1, filter }),
-    });
 
   return { isLoading, count, sellerItem };
 }

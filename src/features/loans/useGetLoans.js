@@ -24,10 +24,11 @@ export function useGetLoans() {
   const sortBy =
     filterBy?.trim() === 'totalLowToHigh'
       ? { field: 'total', direction: true }
-      : filterBy?.trim() === 'totalHighToLow' && {
-          field: 'total',
-          direction: false,
-        };
+      : filterBy?.trim() === 'totalHighToLow'
+        ? { field: 'total', direction: false }
+        : filterBy?.trim() === 'nameZtoA'
+          ? { field: 'name', direction: false, isName: true }
+          : { field: 'name', direction: true, isName: true };
 
   const sortByRaw = searchParams.get('childrenTab');
   const filter = !sortByRaw

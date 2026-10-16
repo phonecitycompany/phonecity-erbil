@@ -15,6 +15,12 @@ export function useEditTransaction() {
       queryClient.invalidateQueries({
         queryKey: ['transactiontotal'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['seller'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['getAllLoans'],
+      });
 
       toast.success('بە سەرکەوتوی دەستکاری کرا', {
         style: {

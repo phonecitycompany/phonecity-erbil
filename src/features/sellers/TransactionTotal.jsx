@@ -38,10 +38,21 @@ export default function TransactionTotal({
   if (isLoading) return <Spinner />;
   const values = arrayOfSellers?.find(seller => seller.id == sellerid);
   if (!values) return;
-  const totalForshow = totalforfilter?.reduce(
-    (total, item) => total + (item.ingoing_purchase - item.outgoing_purchase),
-    0,
-  );
+  const hasFilter =
+    Boolean(searchParams.get('startDate')) ||
+    Boolean(searchParams.get('endDate')) ||
+    Boolean(searchParams.get('date')) ||
+    Boolean(searchParams.get('belowDateValue'));
+
+  const overallTotal =
+    accountTotal !== undefined ? accountTotal : (values?.total ?? 0);
+
+  const filteredTotal =
+    totalforfilter?.reduce(
+      (total, item) => total + (item.ingoing_purchase - item.outgoing_purchase),
+      0,
+    ) ?? 0;
+
   function reverseArr(input) {
     var ret = new Array();
     for (var i = input.length - 1; i >= 0; i--) {
@@ -88,11 +99,17 @@ export default function TransactionTotal({
         )}
         <div className="mt-5">
           <div className="flex justify-end">
-            <div className="flex flex-row-reverse items-center">
-              <div className="input flex w-[17rem] justify-between lg:w-[30rem] ">
-                <div className="">{formatCurrency(totalForshow)}</div>
+            <div className="flex flex-row-reverse items-center gap-4">
+              <div className="input flex w-[17rem] justify-between lg:w-[26rem] ">
+                <div className="">{formatCurrency(overallTotal)}</div>
                 <div className="">کۆی گشتی</div>
               </div>
+              {hasFilter && (
+                <div className="input flex w-[17rem] justify-between lg:w-[26rem] ">
+                  <div className="">{formatCurrency(filteredTotal)}</div>
+                  <div className="">کۆی پاڵفتەکراو</div>
+                </div>
+              )}
               <Modal>
                 <div>
                   <Modal.Open opens="3mula">
