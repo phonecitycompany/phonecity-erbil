@@ -1,14 +1,22 @@
 // import { Dropdown, MenuItem, DropdownItem } from '../../ui/Dropdown';
-import { IoIosArrowDropdownCircle } from 'react-icons/io';
+import { IoIosArrowDropdownCircle, IoIosSearch } from 'react-icons/io';
 // import SortBy from '../../ui/SortBy';
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 function SellerList({ sellerItem, sellerid, setSellerid, className }) {
   const [open, setOpen] = useState(false);
-
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const ref = useOutsideClick(() => {
+    if (open) {
+      setOpen(false);
+      setSearchTerm('');
+    }
+  }, false);
 
   useEffect(() => {
     // const searchParamsSellerValue = searchParams.get('seller');
@@ -21,11 +29,19 @@ function SellerList({ sellerItem, sellerid, setSellerid, className }) {
     }
   }, [sellerid]);
 
+  const filteredSellers = sellerItem?.filter(seller =>
+    seller?.seller_name
+      ?.toString()
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase().trim()),
+  );
+
   return (
-    <div className={`relative flex w-1/2 flex-col ${className}`}>
+    <div ref={ref} className={`relative flex w-1/2 flex-col ${className}`}>
       <div
         onClick={() => {
-          setOpen(!open);
+          setOpen(prev => !prev);
+          setSearchTerm('');
         }}
         className=" rtl flex w-full cursor-pointer flex-row items-center justify-between rounded-xl bg-main p-3 hover:bg-main-dark"
       >
@@ -34,32 +50,71 @@ function SellerList({ sellerItem, sellerid, setSellerid, className }) {
             'ناوی كڕیار'}
         </p>
         <IoIosArrowDropdownCircle
-          className={`text-4xl text-white transition-all duration-200 ease-in-out ${open === true && 'rotate-180'} `}
+          className={`text-4xl text-white transition-all duration-200 ease-in-out ${open === true ? 'rotate-180' : ''} `}
         />
       </div>
       {open === true && (
-        <div className="absolute top-full z-10 mt-2 max-h-96 w-full overflow-y-scroll rounded-xl border-2 bg-white p-6 shadow-md">
-          {sellerItem?.map((item, i) => {
-            return (
-              <div
-                key={i}
-                onClick={() => {
-                  setOpen(false);
-                  setSellerid(item.id);
-                  searchParams.delete('startDate');
-                  searchParams.delete('endDate');
-                  searchParams.delete('date');
-                  searchParams.delete('sortBy');
-                  searchParams.delete('seller');
-                  searchParams.delete('page');
-                  setSearchParams(searchParams);
+        <div className="absolute top-full z-30 mt-2 flex max-h-96 w-full flex-col overflow-hidden rounded-xl border-2 border-gray-100 bg-white shadow-xl">
+          <div
+            className="rtl flex items-center gap-2 border-b border-gray-200 bg-gray-50 p-3"
+            onClick={e => e.stopPropagation()}
+          >
+            <IoIosSearch className="flex-shrink-0 text-3xl text-gray-400" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              placeholder="گەڕان بەدوای کڕیار..."
+              className="w-full bg-transparent text-xl text-gray-800 outline-none placeholder:text-gray-400"
+              autoFocus
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={e => {
+                  e.stopPropagation();
+                  setSearchTerm('');
                 }}
-                className="cursor-pointer rounded-lg p-4 text-2xl hover:bg-gray-100"
+                className="flex-shrink-0 px-1 text-lg text-gray-400 hover:text-gray-600"
               >
-                {item.seller_name}
+                ✕
+              </button>
+            )}
+          </div>
+          <div className="max-h-72 overflow-y-auto p-2">
+            {filteredSellers && filteredSellers.length > 0 ? (
+              filteredSellers.map((item, i) => {
+                return (
+                  <div
+                    key={item.id || i}
+                    onClick={() => {
+                      setOpen(false);
+                      setSearchTerm('');
+                      setSellerid(item.id);
+                      searchParams.delete('startDate');
+                      searchParams.delete('endDate');
+                      searchParams.delete('date');
+                      searchParams.delete('sortBy');
+                      searchParams.delete('seller');
+                      searchParams.delete('page');
+                      setSearchParams(searchParams);
+                    }}
+                    className={`cursor-pointer rounded-lg p-3 text-2xl hover:bg-gray-100 rtl text-right transition-colors ${
+                      sellerid == item.id
+                        ? 'bg-blue-50 font-bold text-main'
+                        : 'text-gray-800'
+                    }`}
+                  >
+                    {item.seller_name}
+                  </div>
+                );
+              })
+            ) : (
+              <div className="p-4 text-center text-xl text-gray-500 rtl">
+                هیچ کڕیارێک نەدۆزرایەوە
               </div>
-            );
-          })}
+            )}
+          </div>
         </div>
       )}
     </div>
